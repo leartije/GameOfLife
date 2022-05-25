@@ -8,8 +8,7 @@ public class Main {
 
         int n = SCANNER.nextInt();
 
-        Universe universe = new Universe(n, 100);
-        universe.generations();
+        new Universe(n, 100).generations();
 
     }
 }
