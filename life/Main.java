@@ -6,9 +6,9 @@ public class Main {
     public static Scanner SCANNER = new Scanner(System.in);
     public static void main(String[] args) {
 
-        int n = SCANNER.nextInt();
+        int size = SCANNER.nextInt();
 
-        new Universe(n, 100).generations();
+        new Universe(size, 100).generations();
 
     }
 }

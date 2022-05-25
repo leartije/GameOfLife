@@ -48,15 +48,21 @@ public class Universe {
             for (int i = 0; i < size; i++) {
                 for (int j = 0; j < size; j++) {
                     int aliveN = aliveNeighbors(i, j);
+
                     if (isAlive(i, j) && (aliveN == 2 || aliveN == 3)) {
                         nextGeneration[i][j] = ALIVE;
                         alive++;
-                    } else if (aliveN == 3) {
+                        continue;
+                    }
+
+                    if (aliveN == 3) {
                         nextGeneration[i][j] = ALIVE;
                         alive++;
-                    } else {
-                        nextGeneration[i][j] = DEAD;
+                        continue;
                     }
+
+                    nextGeneration[i][j] = DEAD;
+
                 }
             }
             numOfGenerations--;
@@ -86,49 +92,49 @@ public class Universe {
 
     public int aliveNeighbors(int i, int j) {
 
-        int uL = currentGeneration.length - 1;
+        int size = currentGeneration.length - 1;
         int aliveNeighbors = 0;
 
         int x;
         int y;
 
         //nw
-        x = i - 1 < 0 ? uL : i - 1;
-        y = j - 1 < 0 ? uL : j - 1;
+        x = i - 1 < 0 ? size : i - 1;
+        y = j - 1 < 0 ? size : j - 1;
         aliveNeighbors += isAlive(x, y) ? 1 : 0;
 
         //n
-        x = i - 1 < 0 ? uL : i - 1;
+        x = i - 1 < 0 ? size : i - 1;
         y = j;
         aliveNeighbors += isAlive(x, y) ? 1 : 0;
 
         //ne
-        x = i - 1 < 0 ? uL : i - 1;
-        y = j + 1 > uL ? 0 : j + 1;
+        x = i - 1 < 0 ? size : i - 1;
+        y = j + 1 > size ? 0 : j + 1;
         aliveNeighbors += isAlive(x, y) ? 1 : 0;
 
         //w
         x = i;
-        y = j - 1 < 0 ? uL : j - 1;
+        y = j - 1 < 0 ? size : j - 1;
         aliveNeighbors += isAlive(x, y) ? 1 : 0;
 
         //e
-        y = j + 1 <= uL ? j + 1 : 0;
+        y = j + 1 > size ? 0 : j + 1;
         aliveNeighbors += isAlive(x, y) ? 1 : 0;
 
         //sw
-        x = i + 1 <= uL ? i + 1 : 0;
-        y = j - 1 < 0 ? uL : j - 1;
+        x = i + 1 > size ? 0 : i + 1;
+        y = j - 1 < 0 ? size : j - 1;
         aliveNeighbors += isAlive(x, y) ? 1 : 0;
 
         //s
-        x = i + 1 <= uL ? i + 1 : 0;
+        x = i + 1 > size ? 0 : i + 1;
         y = j;
         aliveNeighbors += isAlive(x, y) ? 1 : 0;
 
         //se
-        x = i + 1 <= uL ? i + 1 : 0;
-        y = j + 1 <= uL ? j + 1 : 0;
+        x = i + 1 > size ? 0 : i + 1;
+        y = j + 1 > size ? 0 : j + 1;
         aliveNeighbors += isAlive(x, y) ? 1 : 0;
 
         return aliveNeighbors;
