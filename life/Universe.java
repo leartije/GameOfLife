@@ -43,35 +43,43 @@ public class Universe {
         int gen = 1;
         int alive;
 
+        if (numOfGenerations == 0) {
+            print();
+            return;
+        }
+
         while (numOfGenerations > 0) {
             alive = 0;
             for (int i = 0; i < size; i++) {
                 for (int j = 0; j < size; j++) {
                     int aliveN = aliveNeighbors(i, j);
-
+                    //if it is alive and has 2 or 3 alive neighbors it stays alive
                     if (isAlive(i, j) && (aliveN == 2 || aliveN == 3)) {
                         nextGeneration[i][j] = ALIVE;
                         alive++;
                         continue;
                     }
-
+                    //if it is dead but has 3 alive neighbors then it should be revived
                     if (aliveN == 3) {
                         nextGeneration[i][j] = ALIVE;
                         alive++;
                         continue;
                     }
-
+                    //otherwise it is dead
                     nextGeneration[i][j] = DEAD;
 
                 }
             }
+
             numOfGenerations--;
             updateCurrentGeneration();
             displayStatistic(gen, alive);
             print();
             gen++;
 
+
         }
+
     }
 
     public void updateCurrentGeneration() {
@@ -104,12 +112,10 @@ public class Universe {
         aliveNeighbors += isAlive(x, y) ? 1 : 0;
 
         //n
-        x = i - 1 < 0 ? size : i - 1;
         y = j;
         aliveNeighbors += isAlive(x, y) ? 1 : 0;
 
         //ne
-        x = i - 1 < 0 ? size : i - 1;
         y = j + 1 > size ? 0 : j + 1;
         aliveNeighbors += isAlive(x, y) ? 1 : 0;
 
@@ -128,12 +134,10 @@ public class Universe {
         aliveNeighbors += isAlive(x, y) ? 1 : 0;
 
         //s
-        x = i + 1 > size ? 0 : i + 1;
         y = j;
         aliveNeighbors += isAlive(x, y) ? 1 : 0;
 
         //se
-        x = i + 1 > size ? 0 : i + 1;
         y = j + 1 > size ? 0 : j + 1;
         aliveNeighbors += isAlive(x, y) ? 1 : 0;
 
